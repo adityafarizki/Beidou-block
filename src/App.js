@@ -1,25 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class Video extends React.Component {
+  constructor(props) {
+    super(props)
+    this.autoPlay = props.autoPlay ? props.autoPlay : false
+    this.vidTime = this.props.vidTime ? this.props.vidTime : 0
+    this.vidRef = this.props.vidRef ? this.props.vidRef : React.createRef()
+  }
+
+  render = () => {
+    return (
+      <video
+        id={this.props.id}
+        ref={this.vidRef}
+        autoPlay={this.autoPlay}
+        muted={this.autoPlay}
+      >
+        <source src={this.props.source} type="video/mp4" />
+      </video>
+    )
+  }
+}
+
+
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.vidRef = React.createRef()
+  }
+
+  componentDidMount = () => {
+    document.addEventListener('keydown', this.handleSkillTrigger)
+  }
+
+  handleSkillTrigger = (e) => {
+    if(e.key === 'e') {
+      this.vidRef.current.currentTime = 4.45
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <Video 
+          id="mainVideo"
+          vidRef={this.vidRef}
+          source="testVid.mp4"
+          autoPlay={true}
+        />
+      </div>
+    )
+  }
 }
 
 export default App;
