@@ -1,0 +1,22 @@
+{
+  "videos": [
+    {
+      "name": "testVid.mp4",
+      "counter_points": [
+        [
+          6.50,
+          7
+        ]
+      ]
+    },
+    {
+      "name": "testVid2.mp4",
+      "counter_points": [
+        [
+          3.02,
+          3.33
+        ]
+      ]
+    }
+  ]
+}

@@ -1,11 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { App, mainAppFunctions, tutorFunctions } from './App';
 import reportWebVitals from './reportWebVitals';
+
+class MainController extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isShowingTutorial: true
+    }
+  }
+
+  launchApp = () => {
+    this.setState({ isShowingTutorial: false })
+    this.forceUpdate()
+  }
+
+  render() {
+    let tutorFuncs = { ...tutorFunctions, nextRoundFunc: this.launchApp.bind(this) }
+    if (this.state.isShowingTutorial) {
+      return <App {...tutorFuncs} />
+    } else {
+      return <App {...mainAppFunctions} />
+    }
+  }
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <MainController />
   </React.StrictMode>,
   document.getElementById('root')
 );
